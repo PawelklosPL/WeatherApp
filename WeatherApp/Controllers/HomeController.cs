@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WeatherApp.Models;
+using System.Net.Http.Formatting;
 
 namespace WeatherApp.Controllers
 {
@@ -62,36 +65,32 @@ namespace WeatherApp.Controllers
         /* Api url - https://openweathermap.org/ */
         private static async Task GetPageSizeAsync(string city_name)  
        {
-           using (var client = new HttpClient())
-           {
-               /* Build http client query */
-               client.BaseAddress = new Uri("http://api.openweathermap.org/data/2.5/weather");
-               client.DefaultRequestHeaders.Accept.Clear();
-               client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-               
-              
-               /* Private key Generated on openweathermap */
-               string key = "1a5898dc452ba792f5d8efc82513a471";
-               /* Add get value to url */
-               HttpResponseMessage respon = await client.GetAsync("?q=" + city_name + "&APPID=" + key).ConfigureAwait(continueOnCapturedContext: false);
-               /* If status is OK "Log" value and Insert to DB */
-               if (respon.StatusCode == HttpStatusCode.OK)
-               {
-                   /* Create DB object */
-                   OpenWeather weather = respon.Content.ReadAsAsync<OpenWeather>().Result;
-                   Debug.WriteLine("temp: " + weather.main.temp);
-                   Debug.WriteLine("pressure: " + weather.main.pressure);
-                   Debug.WriteLine("humidity: " + weather.main.humidity);
-                   Debug.WriteLine("description: " + weather.weather[0].description);
-                   Debug.WriteLine("icon: " + weather.weather[0].icon);
-                   Debug.WriteLine("main: " + weather.weather[0].main);
-                   Debug.WriteLine("speed: " + weather.wind.speed);
-                   Debug.WriteLine("country: " + weather.sys.country);
-                   Debug.WriteLine("name: " + weather.name);
-                   /* Go to insert value method */
-                   Debug.WriteLine(InsertToDB(weather));
+            /* Create uri and message */
+            var client = new RestClient("http://api.openweathermap.org/data/2.5/weather?q=" + city_name + "&APPID=1a5898dc452ba792f5d8efc82513a471");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("postman-token", "2fbb3c2e-97e4-c33d-7705-3e41c75b82f7");
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/json");
+            request.AddParameter("application/json", "", ParameterType.RequestBody);
+            /* Send request */
+            IRestResponse response = client.Execute(request);
+                /* If status is OK "Log" value and Insert to DB */
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    /* Create DB object using donwloads body */
+                    OpenWeather weather = JsonConvert.DeserializeObject<OpenWeather>(response.Content);
+                    //Debug.WriteLine("temp: " + weather.main.temp);
+                    //Debug.WriteLine("pressure: " + weather.main.pressure);
+                    //Debug.WriteLine("humidity: " + weather.main.humidity);
+                    //Debug.WriteLine("description: " + weather.weather[0].description);
+                    //Debug.WriteLine("icon: " + weather.weather[0].icon);
+                    //Debug.WriteLine("main: " + weather.weather[0].main);
+                    //Debug.WriteLine("speed: " + weather.wind.speed);
+                    //Debug.WriteLine("country: " + weather.sys.country);
+                    //Debug.WriteLine("name: " + weather.name);
+                    /* Go to insert value method */
+                    InsertToDB(weather);
                }
-           } 
        }
         /* Home Page, Welcome Page */
         public ActionResult Index()

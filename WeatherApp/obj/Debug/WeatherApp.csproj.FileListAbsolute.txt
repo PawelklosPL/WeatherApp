@@ -32,3 +32,5 @@ c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\obj\D
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\obj\Debug\WeatherApp.pdb
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\EntityFramework.dll
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\EntityFramework.xml
+C:\Users\Pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\RestSharp.dll
+C:\Users\Pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\RestSharp.xml
