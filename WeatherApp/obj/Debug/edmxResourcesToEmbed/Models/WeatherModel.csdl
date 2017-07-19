@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBweatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="city_weather">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="main" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="icon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="temp" Type="Double" />
+    <Property Name="pressur" Type="Double" />
+    <Property Name="humidity" Type="Double" />
+    <Property Name="speed" Type="Double" />
+    <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="DBweatherEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="city_weather" EntityType="Self.city_weather" />
+  </EntityContainer>
+</Schema>

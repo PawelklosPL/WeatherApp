@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBweatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="city_weather">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="main" Type="nvarchar" MaxLength="50" />
+    <Property Name="description" Type="nvarchar" MaxLength="50" />
+    <Property Name="icon" Type="nvarchar" MaxLength="25" />
+    <Property Name="temp" Type="float" />
+    <Property Name="pressur" Type="float" />
+    <Property Name="humidity" Type="float" />
+    <Property Name="speed" Type="float" />
+    <Property Name="country" Type="nvarchar" MaxLength="200" />
+    <Property Name="name" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityContainer Name="DBweatherModelStoreContainer">
+    <EntitySet Name="city_weather" EntityType="Self.city_weather" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

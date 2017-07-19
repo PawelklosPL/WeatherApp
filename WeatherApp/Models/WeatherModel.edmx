@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBweatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="city_weather">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="main" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+          <Property Name="icon" Type="nvarchar" MaxLength="25" />
+          <Property Name="temp" Type="float" />
+          <Property Name="pressur" Type="float" />
+          <Property Name="humidity" Type="float" />
+          <Property Name="speed" Type="float" />
+          <Property Name="country" Type="nvarchar" MaxLength="200" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="DBweatherModelStoreContainer">
+          <EntitySet Name="city_weather" EntityType="Self.city_weather" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBweatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="city_weather">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="main" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="icon" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="temp" Type="Double" />
+          <Property Name="pressur" Type="Double" />
+          <Property Name="humidity" Type="Double" />
+          <Property Name="speed" Type="Double" />
+          <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DBweatherEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="city_weather" EntityType="Self.city_weather" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBweatherModelStoreContainer" CdmEntityContainer="DBweatherEntities">
+          <EntitySetMapping Name="city_weather">
+            <EntityTypeMapping TypeName="DBweatherModel.city_weather">
+              <MappingFragment StoreEntitySet="city_weather">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="main" ColumnName="main" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="icon" ColumnName="icon" />
+                <ScalarProperty Name="temp" ColumnName="temp" />
+                <ScalarProperty Name="pressur" ColumnName="pressur" />
+                <ScalarProperty Name="humidity" ColumnName="humidity" />
+                <ScalarProperty Name="speed" ColumnName="speed" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<WeatherApp.Models.city_weather>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>User</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+    </script>
+
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.main)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.icon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.temp) kelvin
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.pressur)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.humidity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.speed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.main)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.icon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.temp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pressur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.humidity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.speed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
+    <div>
+        @Html.ActionLink("Wróć do menu", "Index")
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+</body>
+</html>
