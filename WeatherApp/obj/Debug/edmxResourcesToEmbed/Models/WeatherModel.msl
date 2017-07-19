@@ -4,6 +4,7 @@
     <EntitySetMapping Name="city_weather">
       <EntityTypeMapping TypeName="DBweatherModel.city_weather">
         <MappingFragment StoreEntitySet="city_weather">
+          <ScalarProperty Name="last_update_time" ColumnName="last_update_time" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="main" ColumnName="main" />
           <ScalarProperty Name="description" ColumnName="description" />
@@ -17,5 +18,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="InsertWeather" FunctionName="DBweatherModel.Store.InsertWeather" />
   </EntityContainerMapping>
 </Mapping>

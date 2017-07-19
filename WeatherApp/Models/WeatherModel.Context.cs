@@ -12,6 +12,9 @@ namespace WeatherApp.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class DBweatherEntities : DbContext
     {
@@ -26,5 +29,46 @@ namespace WeatherApp.Models
         }
     
         public DbSet<city_weather> city_weather { get; set; }
+    
+        public virtual int InsertWeather(string main, string description, string icon, Nullable<double> temp, Nullable<double> pressur, Nullable<double> humidity, Nullable<double> speed, string country, string name)
+        {
+            var mainParameter = main != null ?
+                new ObjectParameter("main", main) :
+                new ObjectParameter("main", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var iconParameter = icon != null ?
+                new ObjectParameter("icon", icon) :
+                new ObjectParameter("icon", typeof(string));
+    
+            var tempParameter = temp.HasValue ?
+                new ObjectParameter("temp", temp) :
+                new ObjectParameter("temp", typeof(double));
+    
+            var pressurParameter = pressur.HasValue ?
+                new ObjectParameter("pressur", pressur) :
+                new ObjectParameter("pressur", typeof(double));
+    
+            var humidityParameter = humidity.HasValue ?
+                new ObjectParameter("humidity", humidity) :
+                new ObjectParameter("humidity", typeof(double));
+    
+            var speedParameter = speed.HasValue ?
+                new ObjectParameter("speed", speed) :
+                new ObjectParameter("speed", typeof(double));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("country", country) :
+                new ObjectParameter("country", typeof(string));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertWeather", mainParameter, descriptionParameter, iconParameter, tempParameter, pressurParameter, humidityParameter, speedParameter, countryParameter, nameParameter);
+        }
     }
 }

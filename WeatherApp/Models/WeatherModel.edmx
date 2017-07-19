@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBweatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBweatherModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="city_weather">
           <Key>
             <PropertyRef Name="id" />
@@ -19,12 +19,23 @@
           <Property Name="speed" Type="float" />
           <Property Name="country" Type="nvarchar" MaxLength="200" />
           <Property Name="name" Type="nvarchar" MaxLength="200" />
+          <Property Name="last_update_time" Type="datetime" />
         </EntityType>
+        <Function Name="InsertWeather" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="main" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+          <Parameter Name="icon" Type="varchar" Mode="In" />
+          <Parameter Name="temp" Type="float" Mode="In" />
+          <Parameter Name="pressur" Type="float" Mode="In" />
+          <Parameter Name="humidity" Type="float" Mode="In" />
+          <Parameter Name="speed" Type="float" Mode="In" />
+          <Parameter Name="country" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="DBweatherModelStoreContainer">
           <EntitySet Name="city_weather" EntityType="Self.city_weather" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBweatherModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -42,9 +53,21 @@
           <Property Name="speed" Type="Double" />
           <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="last_update_time" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="DBweatherEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="city_weather" EntityType="Self.city_weather" />
+          <FunctionImport Name="InsertWeather">
+            <Parameter Name="main" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="icon" Mode="In" Type="String" />
+            <Parameter Name="temp" Mode="In" Type="Double" />
+            <Parameter Name="pressur" Mode="In" Type="Double" />
+            <Parameter Name="humidity" Mode="In" Type="Double" />
+            <Parameter Name="speed" Mode="In" Type="Double" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -55,6 +78,7 @@
           <EntitySetMapping Name="city_weather">
             <EntityTypeMapping TypeName="DBweatherModel.city_weather">
               <MappingFragment StoreEntitySet="city_weather">
+                <ScalarProperty Name="last_update_time" ColumnName="last_update_time" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="main" ColumnName="main" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -68,6 +92,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertWeather" FunctionName="DBweatherModel.Store.InsertWeather" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -14,8 +14,20 @@
     <Property Name="speed" Type="Double" />
     <Property Name="country" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="last_update_time" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityContainer Name="DBweatherEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="city_weather" EntityType="Self.city_weather" />
+    <FunctionImport Name="InsertWeather">
+      <Parameter Name="main" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="icon" Mode="In" Type="String" />
+      <Parameter Name="temp" Mode="In" Type="Double" />
+      <Parameter Name="pressur" Mode="In" Type="Double" />
+      <Parameter Name="humidity" Mode="In" Type="Double" />
+      <Parameter Name="speed" Mode="In" Type="Double" />
+      <Parameter Name="country" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

@@ -12,9 +12,6 @@ namespace WeatherApp.Models
     using System;
     using System.Collections.Generic;
     
-
-
-
     public partial class city_weather
     {
         public int id { get; set; }
@@ -27,7 +24,6 @@ namespace WeatherApp.Models
         public Nullable<double> speed { get; set; }
         public string country { get; set; }
         public string name { get; set; }
-
-
+        public Nullable<System.DateTime> last_update_time { get; set; }
     }
 }
