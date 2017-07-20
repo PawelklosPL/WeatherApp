@@ -37,7 +37,7 @@
                     @Html.DisplayNameFor(model => model.icon)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.temp) kelvin
+                    @Html.DisplayNameFor(model => model.temp) Celsius
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.pressur)
@@ -71,7 +71,7 @@
                         @Html.DisplayFor(modelItem => item.description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.icon)
+                        <img src="http://openweathermap.org/img/w/@Html.DisplayFor(modelItem => item.icon)&#46png" runat="server" />  
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.temp)

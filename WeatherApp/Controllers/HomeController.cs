@@ -38,7 +38,7 @@ namespace WeatherApp.Controllers
                     cmd.Parameters.Add(new SqlParameter("@main", w.weather[0].main));
                     cmd.Parameters.Add(new SqlParameter("@description", w.weather[0].description));
                     cmd.Parameters.Add(new SqlParameter("@icon", w.weather[0].icon));
-                    cmd.Parameters.Add(new SqlParameter("@temp", w.main.temp));
+                    cmd.Parameters.Add(new SqlParameter("@temp", Convert.ToDouble(w.main.temp.Replace(".", ",")) - 272.15));
                     cmd.Parameters.Add(new SqlParameter("@pressur", w.main.pressure));
                     cmd.Parameters.Add(new SqlParameter("@humidity", w.main.humidity));
                     cmd.Parameters.Add(new SqlParameter("@speed", w.wind.speed));
@@ -103,6 +103,7 @@ namespace WeatherApp.Controllers
         public ActionResult User()
         {
             /* Create list from DB model and return to View */
+            //Debug.WriteLine(db.city_weather.);
             return View(db.city_weather.ToList());
         }
         // POST: /Home/InsertWeather
