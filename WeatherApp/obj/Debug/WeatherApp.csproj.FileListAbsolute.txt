@@ -1,4 +1,3 @@
-c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csprojResolveAssemblyReference.cache
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\WeatherApp.dll.config
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\WeatherApp.dll
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\WeatherApp.pdb
@@ -34,3 +33,4 @@ c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\E
 c:\users\pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\EntityFramework.xml
 C:\Users\Pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\RestSharp.dll
 C:\Users\Pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\bin\RestSharp.xml
+C:\Users\Pawel\documents\visual studio 2013\Projects\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csprojResolveAssemblyReference.cache

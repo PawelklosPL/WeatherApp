@@ -1,3 +1,12 @@
 ﻿@Html.ActionLink("Admin", "InsertWeather", "Home");
 <br/>
 @Html.ActionLink("Normalny użytkownik", "User", "Home");
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Welcome user @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h1>
+    <a href="@Url.Action("SignOut","Home")">Logout</a>
+}
+@ViewBag.Title

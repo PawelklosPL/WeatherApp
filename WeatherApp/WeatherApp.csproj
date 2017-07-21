@@ -152,6 +152,9 @@
     <Compile Include="Models\city_weather.cs">
       <DependentUpon>WeatherModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\login.cs">
+      <DependentUpon>WeatherModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WeatherModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,6 +170,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WeatherModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="OpenWeather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,6 +235,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\User.cshtml" />
     <Content Include="Views\Home\InsertWeather.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

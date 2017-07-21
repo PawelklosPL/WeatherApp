@@ -19,5 +19,15 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="InsertWeather" FunctionName="DBweatherModel.Store.InsertWeather" />
+    <EntitySetMapping Name="login">
+      <EntityTypeMapping TypeName="DBweatherModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
