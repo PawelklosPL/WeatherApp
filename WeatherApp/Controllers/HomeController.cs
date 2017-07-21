@@ -12,7 +12,10 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using WeatherApp.Models;
@@ -99,11 +102,13 @@ namespace WeatherApp.Controllers
          [Authorize(Roles = "Admin, Guest")]
         public ActionResult Index()
         {
+            //Roles.GetRolesForUser("a");
+
+           // Debug.WriteLine();
 
             return View();
            
         }
-
         // GET: /Home/User
         /* User Controler */
         public ActionResult User()
@@ -136,26 +141,38 @@ namespace WeatherApp.Controllers
         [HttpPost]
         public ActionResult Login(login model, string returnUrl)
         {
-            DBweatherEntities db = new DBweatherEntities();
-            var dataItem = db.login.Where(x => x.user_name == model.user_name && x.password == model.password).First();
-            if (dataItem != null)
+            Debug.WriteLine(model.password);
+            string hashedPassword = Convert.ToBase64String(Encoding.UTF8.GetBytes(model.password));
+            try
             {
-                FormsAuthentication.SetAuthCookie(dataItem.user_name, false);
-                if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                DBweatherEntities db = new DBweatherEntities();
+                var dataItem = db.login.Where(x => x.user_name == model.user_name && x.password.Equals(hashedPassword)).First();
+                if (dataItem != null)
                 {
-                    return Redirect(returnUrl);
+                    FormsAuthentication.SetAuthCookie(dataItem.user_name, false);
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 else
                 {
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("", "Invalid user/pass");
+                    return View();
                 }
             }
-            else
+            catch
             {
                 ModelState.AddModelError("", "Invalid user/pass");
                 return View();
             }
+
+
         }
         [Authorize]
         [AllowAnonymous]
@@ -164,5 +181,6 @@ namespace WeatherApp.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Home");
         }
+       
     }
 }
