@@ -29,6 +29,7 @@ namespace WeatherApp.Models
         }
     
         public DbSet<city_weather> city_weather { get; set; }
+        public DbSet<login> login { get; set; }
     
         public virtual int InsertWeather(string main, string description, string icon, Nullable<double> temp, Nullable<double> pressur, Nullable<double> humidity, Nullable<double> speed, string country, string name)
         {

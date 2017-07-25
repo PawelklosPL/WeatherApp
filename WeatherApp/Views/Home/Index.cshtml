@@ -1,3 +1,23 @@
-﻿@Html.ActionLink("Admin", "InsertWeather", "Home");
-<br/>
-@Html.ActionLink("Normalny użytkownik", "User", "Home");
+﻿
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Welcome user @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h1>
+    <h1>Role is: @(Roles.GetRolesForUser(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")[0])</h1>
+    
+    if (Roles.GetRolesForUser(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")[0] == "Admin")
+    {
+         @Html.ActionLink("Dodaj miasto", "InsertWeather", "Home");
+        <br />
+         @Html.ActionLink("Zobacz tabele pogody", "User", "Home");
+    }
+    else
+    {
+         @Html.ActionLink("Zobacz tabele pogody", "User", "Home");
+    }
+    <br />
+    <a href="@Url.Action("SignOut","Home")">Logout</a>
+}
+@ViewBag.Title

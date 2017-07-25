@@ -16,6 +16,15 @@
     <Property Name="name" Type="nvarchar" MaxLength="200" />
     <Property Name="last_update_time" Type="datetime" />
   </EntityType>
+  <EntityType Name="login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="role" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <Function Name="InsertWeather" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="main" Type="varchar" Mode="In" />
     <Parameter Name="description" Type="varchar" Mode="In" />
@@ -29,5 +38,6 @@
   </Function>
   <EntityContainer Name="DBweatherModelStoreContainer">
     <EntitySet Name="city_weather" EntityType="Self.city_weather" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

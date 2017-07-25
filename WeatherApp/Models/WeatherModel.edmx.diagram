@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="da656f293e28422988e6acfacf49b4a1" Name="Diagram1">
         <EntityTypeShape EntityType="DBweatherModel.city_weather" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBweatherModel.login" Width="1.75" PointX="3" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

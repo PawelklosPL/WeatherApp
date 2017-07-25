@@ -10,16 +10,22 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using WeatherApp.Models;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Helpers;
+using System.Web.Mvc;
+using System.Web.Security;
+using WeatherApp.Models;
 
 namespace WeatherApp.Controllers
 {
     public class HomeController : Controller
     {
+       
+
         /* Database weather object */
         private DBweatherEntities db = new DBweatherEntities();
 
@@ -93,10 +99,15 @@ namespace WeatherApp.Controllers
                }
        }
         /* Home Page, Welcome Page */
+         [Authorize(Roles = "Admin, Guest")]
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            //Roles.GetRolesForUser("a");
+
+           // Debug.WriteLine();
+
             return View();
+           
         }
         // GET: /Home/User
         /* User Controler */
@@ -122,5 +133,54 @@ namespace WeatherApp.Controllers
         {
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(login model, string returnUrl)
+        {
+            Debug.WriteLine(model.password);
+            string hashedPassword = Convert.ToBase64String(Encoding.UTF8.GetBytes(model.password));
+            try
+            {
+                DBweatherEntities db = new DBweatherEntities();
+                var dataItem = db.login.Where(x => x.user_name == model.user_name && x.password.Equals(hashedPassword)).First();
+                if (dataItem != null)
+                {
+                    FormsAuthentication.SetAuthCookie(dataItem.user_name, false);
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                             && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid user/pass");
+                    return View();
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Invalid user/pass");
+                return View();
+            }
+
+
+        }
+        [Authorize]
+        [AllowAnonymous]
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home");
+        }
+       
     }
 }
